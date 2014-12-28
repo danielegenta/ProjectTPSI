@@ -9,4 +9,8 @@ Questo è file di documentazione!
 
 //
 
-Versione 0.0 creazione Repo
+Changelog:
+0.0 creazione Repo
+0.1 aggiunta file HTML, CSS e JS.
+
+//
