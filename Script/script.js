@@ -1,17 +1,20 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
-$(document).ready(function(){
-	for (var i = 1; i < 17; i++) {
-    	var cl = "nm";
-        var cn = i;
+$(document).ready(function()
+{
+	var i=0;
+	for (i = 0; i < 16; i++) 
+	{
+    	var classeDiv = "celleTabella";
+        var contenutoDiv = i;
         if(i == 16) 
         {
-            cn = "X";
+            contenutoDiv = "X";
         }
-        var div = $('<div />');
-        div.attr("id",i);
+        var cella = $('<div />');
+        cella.attr("id",i);
         //div.attr("onclick","move(" + i + ")");
-        div.addClass(cl);
-        div.html(cn);
-        $("#mainTable").append(div);
-        }
+        cella.addClass(classeDiv);
+        cella.html(contenutoDiv);
+        $("#mainTable").append(cella);
+    }
 });
