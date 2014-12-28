@@ -5,18 +5,10 @@ Progetto di TPSI consistente nel creare il gioco del 15 utilizzando HTML, CSS, J
 
 //
 
-Questo è file di documentazione
-
-//
-
-Changelog:
--0.0 creazione Repo
--0.1 aggiunta file HTML, CSS e JS.
--0.1.1 ri-organizzazione tra i files
+Questo è il file di documentazione.
 
 //
 
 Gruppo:
-Daniele Genta, Samuele Levrone, Davide Massimino, Mite Nikolov
+Daniele Genta, Samuele Levrone, Davide Massimino, Mite Nikolov.
 
-Levro gay
