@@ -10,7 +10,7 @@ Questo è file di documentazione!
 //
 
 Changelog:
-0.0 creazione Repo
-0.1 aggiunta file HTML, CSS e JS.
+-0.0 creazione Repo
+-0.1 aggiunta file HTML, CSS e JS.
 
 //
