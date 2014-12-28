@@ -4,3 +4,17 @@
 	height:400px;
 	width:400px;
 }
+
+.nm {
+    cursor: pointer;
+    width:70px;
+    height:70px;
+    text-align: center;
+    line-height: 70px;
+    float:left;
+
+
+    font-size: 34px;
+    font-weight: bold;
+    border: 1px solid #FFF;
+}
