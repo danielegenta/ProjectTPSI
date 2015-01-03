@@ -12,9 +12,20 @@ $(document).ready(function()
         }
         var cella = $('<div />');
         cella.attr("id",i);
-        //div.attr("onclick","move(" + i + ")");
+        cella.attr("onclick","clickCell(" + i + ")");
         cella.addClass(classeDiv);
         cella.html(contenutoDiv);
         $("#mainTable").append(cella);
     }
+     $("#btnMescola").click(function(){
+     	alert("Rimescolare le celle")
+      });
+       $("#btnNuovaPartita").click(function(){
+     	alert("Rimescolare le celle, azzerare tempo e mosse")
+      });
 });
+
+  function clickCell(id) {
+        alert("hai cliccato: "+id);
+    }
+ 

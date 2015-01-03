@@ -1,7 +1,7 @@
 #mainTable
 {
-	color: red;
-	height:400px;
+	color: black;
+	height:350px;
 	width:400px;
 }
 
@@ -12,6 +12,7 @@
     text-align: center;
     line-height: 70px;
     float:left;
+    background-color:lightgrey;
     font-size: 34px;
     font-weight: bold;
     border: 1px solid #FFF;
