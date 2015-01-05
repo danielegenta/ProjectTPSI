@@ -5,10 +5,14 @@ $(document).ready(function()
 	for (i = 0; i < 16; i++) 
 	{
     	var classeDiv = "celleTabella";
-        var contenutoDiv = i;
-        if(i == 16) 
+        var contenutoDiv;
+        if(i == 15) 
         {
             contenutoDiv = "X";
+        }
+        else
+        {
+        	contenutoDiv = i;
         }
         var cella = $('<div />');
         cella.attr("id",i);
@@ -25,7 +29,8 @@ $(document).ready(function()
       });
 });
 
-  function clickCell(id) {
-        alert("hai cliccato: "+id);
-    }
+  function clickCell(id) 
+  {
+	alert(id);
+   }
  
