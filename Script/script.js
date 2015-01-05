@@ -23,6 +23,7 @@ $(document).ready(function()
         cella.addClass(classeDiv);
         cella.html(contenutoDiv);
         $("#mainTable").append(cella);
+        //fare mescolamento
     }
     
      $("#btnMescola").click(function(){
@@ -35,6 +36,31 @@ $(document).ready(function()
 
   function clickCell(id) 
   {
-	alert($("#mainTable").children("#"+id).attr("id"));
+	alert($("#mainTable").children().eq(id+1).text());
+	var testo=$("#mainTable").children().eq(id).text();
+	if ($("#mainTable").children().eq(id+1).text()=="X")
+	{
+
+		$("#mainTable").children().eq(id+1).html(testo);
+		$("#mainTable").children().eq(id).html("X");
+	}
+	else if ($("#mainTable").children().eq(id-1).text()=="X")
+	{
+
+		$("#mainTable").children().eq(id-1).html(testo);
+		$("#mainTable").children().eq(id).html("X");
+	}
+	else if ($("#mainTable").children().eq(id+4).text()=="X")
+	{
+
+		$("#mainTable").children().eq(id+4).html(testo);
+		$("#mainTable").children().eq(id).html("X");
+	}
+	else if ($("#mainTable").children().eq(id-4).text()=="X")
+	{
+
+		$("#mainTable").children().eq(id-4).html(testo);
+		$("#mainTable").children().eq(id).html("X");
+	}
    }
  
