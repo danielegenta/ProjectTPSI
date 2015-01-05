@@ -1,7 +1,7 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
 //Variabili per cronometro
 var stringaTempo = "00:00";
-var scorriTempo = false;
+var scorriTempo = false, pausa=false;
 var velocitaCronometro = 1000;
 var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec;
 //Setto impostazioni
@@ -43,12 +43,22 @@ $(document).ready(function()
     	mescolaCelle();
     	nuovaPartita();
     });
+     $("#btnPausa").click(function(){
+    	switchCronometro();
+    	if (pausa==false)
+    		$("#btnPausa").html("Riavvia");
+    	else
+    		$("#btnPausa").html("Pausa");
+    	pausa=!pausa;
+    });
 });
 
 //Ottimizzare
 //Evento click su una cella della tabella
   function clickCell(id) 
   {
+  	//Il clic su una cella annulla la pausa
+  	pausa=false;
   	var aumentaMosse=true;
   	//Recupero il numero di mosse corrente
   	var numeroMosse=parseInt($("#mosse").text())
@@ -126,19 +136,24 @@ function switchCronometro()
         if(scorriTempo == false) 
         {            
             stringaTempo = "00:00";
-            cnt = setInterval(function() {
+            cronometro = setInterval(function() {
                 avviaCronometro();
             },velocitaCronometro);
         }
-        else
+        else if (scorriTempo==false)
         {
             scorriTempo = false;
-            clearInterval(cnt);
-        }        
+            if (pausa==true)
+            {
+            	clearInterval(cronometro);
+            }
+        }       
 }
 
 //Misura il tempo e lo stampa
 function avviaCronometro(){
+	if (pausa==false)
+	{
 	scorriTempo = true;
     decineMinuti = parseInt(stringaTempo.charAt(0));
     unitaMinuti = parseInt(stringaTempo.charAt(1));
@@ -153,7 +168,7 @@ function avviaCronometro(){
                             unitaMinuti = 0;
                             if(decineMinuti >= 9)
                             {
-                                clearInterval(cnt);
+                                clearInterval(cronometro);
                             }
                             else
                             {
@@ -179,5 +194,6 @@ function avviaCronometro(){
         for ( var i = 0; i < stringaTempo.length; i++ ) {
             $("#s" + i).html(stringaTempo.charAt(i))
         }
+    }
 }
  
