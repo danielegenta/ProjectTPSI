@@ -38,12 +38,12 @@ $(document).ready(function()
   	var numeroMosse=parseInt($("#mosse").text())
   		//alert($("#mainTable").children().eq(id+1).text());
 	var testo=$("#mainTable").children().eq(id).text();
-	if ($("#mainTable").children().eq(id+1).text()=="X")
+	if ($("#mainTable").children().eq(id+1).text()=="X" && id<16)
 	{
 		$("#mainTable").children().eq(id+1).html(testo);
 		$("#mainTable").children().eq(id).html("X");
 	}
-	else if ($("#mainTable").children().eq(id-1).text()=="X")
+	else if ($("#mainTable").children().eq(id-1).text()=="X" && id>0)
 	{
 		$("#mainTable").children().eq(id-1).html(testo);
 		$("#mainTable").children().eq(id).html("X");
@@ -68,5 +68,22 @@ $(document).ready(function()
 	}
 	aumentaMosse=true;
 	//controllo vincita
+	controlloVincita();
    }
+  
+//Ottimizzare con un while 
+function controlloVincita()
+{
+	var vincita=true;
+	for (i=0; i<15; i++)
+	{
+	//alert($("#mainTable").children().eq(i).text());
+	//alert(parseInt($("#mainTable").children().eq(i).attr("id"))+1);
+		if ($("#mainTable").children().eq(i).text()!=parseInt($("#mainTable").children().eq(i).attr("id"))+1)
+			vincita=false;
+	}
+	if (vincita==true)
+		alert("hai vinto");
+}   
+
  
