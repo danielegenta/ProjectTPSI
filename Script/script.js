@@ -30,7 +30,7 @@ $(document).ready(function()
         cella.html(contenutoDiv);
         //Appendo al padre i div figli
         $("#mainTable").append(cella);
-        //fare mescolamento
+        //fare mescola
     }
     //Mescolo le celle per iniziare la partita da uno stato di non-vincita
     mescolaCelle();
