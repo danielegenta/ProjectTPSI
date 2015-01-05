@@ -63,12 +63,14 @@ $(document).ready(function()
 	//aumento contatore mosse
 	if (aumentaMosse==true)
 	{
+		
 		numeroMosse+=1;
 		$("#mosse").html(numeroMosse);
+		//controllo vincita
+		controlloVincita();
 	}
 	aumentaMosse=true;
-	//controllo vincita
-	controlloVincita();
+	
    }
   
 //Ottimizzare con un while 
@@ -77,13 +79,15 @@ function controlloVincita()
 	var vincita=true;
 	for (i=0; i<15; i++)
 	{
-	//alert($("#mainTable").children().eq(i).text());
-	//alert(parseInt($("#mainTable").children().eq(i).attr("id"))+1);
 		if ($("#mainTable").children().eq(i).text()!=parseInt($("#mainTable").children().eq(i).attr("id"))+1)
 			vincita=false;
 	}
 	if (vincita==true)
+	{
 		alert("hai vinto");
+	//reset timer e mosse
+	$("#mosse").html(0);
+	}
 }   
 
  
