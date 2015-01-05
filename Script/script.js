@@ -1,11 +1,9 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
-	 
 $(document).ready(function()
 {
-	var i=0, j=0;
+	var i=0;
 	for (i = 0; i < 16; i++) 
-	{
-
+	{	
     	var classeDiv = "celleTabella";
         var contenutoDiv;
         if(i == 15) 
@@ -36,31 +34,39 @@ $(document).ready(function()
 
   function clickCell(id) 
   {
-	alert($("#mainTable").children().eq(id+1).text());
+  	var aumentaMosse=true;
+  	var numeroMosse=parseInt($("#mosse").text())
+  		//alert($("#mainTable").children().eq(id+1).text());
 	var testo=$("#mainTable").children().eq(id).text();
 	if ($("#mainTable").children().eq(id+1).text()=="X")
 	{
-
 		$("#mainTable").children().eq(id+1).html(testo);
 		$("#mainTable").children().eq(id).html("X");
 	}
 	else if ($("#mainTable").children().eq(id-1).text()=="X")
 	{
-
 		$("#mainTable").children().eq(id-1).html(testo);
 		$("#mainTable").children().eq(id).html("X");
 	}
 	else if ($("#mainTable").children().eq(id+4).text()=="X")
 	{
-
 		$("#mainTable").children().eq(id+4).html(testo);
 		$("#mainTable").children().eq(id).html("X");
 	}
 	else if ($("#mainTable").children().eq(id-4).text()=="X")
 	{
-
 		$("#mainTable").children().eq(id-4).html(testo);
 		$("#mainTable").children().eq(id).html("X");
 	}
+	else
+		aumentaMosse=false;
+	//aumento contatore mosse
+	if (aumentaMosse==true)
+	{
+		numeroMosse+=1;
+		$("#mosse").html(numeroMosse);
+	}
+	aumentaMosse=true;
+	//controllo vincita
    }
  
