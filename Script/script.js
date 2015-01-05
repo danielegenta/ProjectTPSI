@@ -1,7 +1,13 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
+var start = "00:00.00";
+    var go = false;
+    var speed = 10;
+    var a,b,c,d,e,f,u;
 $(document).ready(function()
-{
+{	
 	var i=0;
+	
+    avvia();
 	for (i = 0; i < 16; i++) 
 	{	
     	var classeDiv = "celleTabella";
@@ -85,10 +91,70 @@ function controlloVincita()
 	}
 	if (vincita==true)
 	{
-		alert("hai vinto");
+		alert("hai vinto (aggiungere dettagli");
 	//reset timer e mosse
 	$("#mosse").html(0);
+	avvia();
 	}
 }   
 
+//cronometro
+//tutto da rivedere ottimizzare
+function avvia()
+{   	
+        if(go == false) {            
+            start = "00:00.00";
+            cnt = setInterval(function() {
+                gostart();
+            },speed);
+        }else{
+            go = false;
+            clearInterval(cnt);
+        }        
+}
+    function gostart(){
+        go = true;
+        a = parseInt(start.charAt(0));
+        b = parseInt(start.charAt(1));
+        u = ":";
+        c = parseInt(start.charAt(3));
+        d = parseInt(start.charAt(4));
+        e = ".";
+        f = parseInt(start.charAt(6));
+        g = parseInt(start.charAt(7));
+        if(g >= 9) {
+            g = 0;
+            if(f >= 9) {
+                f = 0;
+                if(d >= 9) {
+                    d = 0;
+                    if(c >= 5) {
+                        c = 0;
+                        if(b >= 9) {
+                            b = 0;
+                            if(a >= 9) {
+                                clearInterval(cnt);
+                            }else{
+                                a++;
+                            }
+                        }else{
+                            b++;
+                        }
+                    }else{
+                        c++;
+                    }
+                }else{
+                    d++;
+                }
+            }else{
+                f++;
+            }
+        } else {
+            g++;
+        }
+        start = String(a) + String(b) + String(u) + String(c) + String(d) + String(e) + String(f) + String(g);
+        for ( var i = 0; i < start.length; i++ ) {
+            $("#s" + i).html(start.charAt(i))
+        }
+    }
  
