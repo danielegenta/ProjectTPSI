@@ -1,4 +1,5 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
+//Variabili per cronometro
 var start = "00:00.00";
     var go = false;
     var speed = 10;
@@ -6,7 +7,6 @@ var start = "00:00.00";
 $(document).ready(function()
 {	
 	var i=0;
-	
     avvia();
 	for (i = 0; i < 16; i++) 
 	{	
@@ -20,7 +20,6 @@ $(document).ready(function()
         {
         	contenutoDiv = i+1;
         }
-
         var cella = $('<div />');
         cella.attr("id",i);
         cella.attr("onclick","clickCell(" +i+ ")");
@@ -29,13 +28,13 @@ $(document).ready(function()
         $("#mainTable").append(cella);
         //fare mescolamento
     }
-    
-     $("#btnMescola").click(function(){
-     	alert("Rimescolare le celle")
-      });
-       $("#btnNuovaPartita").click(function(){
-     	alert("Rimescolare le celle, azzerare tempo e mosse")
-      });
+    $("#btnMescola").click(function(){
+    	mescolaCelle();
+    });
+    $("#btnNuovaPartita").click(function(){
+    	mescolaCelle();
+    	nuovaPartita();
+    });
 });
 
 //Ottimizzare
@@ -91,12 +90,20 @@ function controlloVincita()
 	}
 	if (vincita==true)
 	{
-		alert("hai vinto (aggiungere dettagli");
-	//reset timer e mosse
-	$("#mosse").html(0);
-	avvia();
+		alert("hai vinto (aggiungere dettagli: numero mosse e tempo");
+		alert("Clicca su nuova partita per iniziare un altro match!")
+		avvia();
 	}
 }   
+
+function mescolaCelle() {}
+function nuovaPartita()
+{
+//reset timer e mosse
+	$("#mosse").html(0);
+	avvia();
+}
+
 
 //cronometro
 //tutto da rivedere ottimizzare
@@ -112,16 +119,16 @@ function avvia()
             clearInterval(cnt);
         }        
 }
-    function gostart(){
-        go = true;
-        a = parseInt(start.charAt(0));
-        b = parseInt(start.charAt(1));
-        u = ":";
-        c = parseInt(start.charAt(3));
-        d = parseInt(start.charAt(4));
-        e = ".";
-        f = parseInt(start.charAt(6));
-        g = parseInt(start.charAt(7));
+function gostart(){
+	go = true;
+    a = parseInt(start.charAt(0));
+    b = parseInt(start.charAt(1));
+    u = ":";
+    c = parseInt(start.charAt(3));
+    d = parseInt(start.charAt(4));
+    e = ".";
+    f = parseInt(start.charAt(6));
+    g = parseInt(start.charAt(7));
         if(g >= 9) {
             g = 0;
             if(f >= 9) {
@@ -156,5 +163,5 @@ function avvia()
         for ( var i = 0; i < start.length; i++ ) {
             $("#s" + i).html(start.charAt(i))
         }
-    }
+}
  

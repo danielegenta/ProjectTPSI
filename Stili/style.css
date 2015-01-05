@@ -1,19 +1,41 @@
 #mainTable
 {
 	color: black;
-	height:350px;
-	width:300px;
+	height:400px;
+	width:400px;
+	vertical-align: middle;
 }
 
-.celleTabella {
+.celleTabella 
+{
     cursor: pointer;
     width:70px;
     height:70px;
-    text-align: center;
-    line-height: 70px;
-    float:left;
-    background-color:lightgrey;
-    font-size: 34px;
-    font-weight: bold;
-    border: 1px solid #FFF;
+    font-size: 30pt;
+    background: #222;
+	display: inline-block;
+	padding: 5px 10px 6px;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	border-radius: 5px;
+	box-shadow: 0 1px 3px #999;
+	text-shadow: 0 -1px 1px #222;
+	border-bottom: 1px solid #222;
+	position: relative;
+	vertical-align: middle;
+}
+
+body 
+{
+	background: #474747;
+}
+
+#Titolo1 
+{
+	color: #222;
+	text-shadow: 0px 2px 3px #555;
+	font: 70px Tahoma, Helvetica, Arial, Sans-Serif;
+	text-align: center;
 }
