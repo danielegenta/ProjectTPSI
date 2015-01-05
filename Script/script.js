@@ -32,6 +32,7 @@ $(document).ready(function()
       });
 });
 
+//Ottimizzare
   function clickCell(id) 
   {
   	var aumentaMosse=true;
