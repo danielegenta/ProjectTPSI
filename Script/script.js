@@ -1,9 +1,11 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
+	 
 $(document).ready(function()
 {
-	var i=0;
+	var i=0, j=0;
 	for (i = 0; i < 16; i++) 
 	{
+
     	var classeDiv = "celleTabella";
         var contenutoDiv;
         if(i == 15) 
@@ -12,15 +14,17 @@ $(document).ready(function()
         }
         else
         {
-        	contenutoDiv = i;
+        	contenutoDiv = i+1;
         }
+
         var cella = $('<div />');
         cella.attr("id",i);
-        cella.attr("onclick","clickCell(" + i + ")");
+        cella.attr("onclick","clickCell(" +i+ ")");
         cella.addClass(classeDiv);
         cella.html(contenutoDiv);
         $("#mainTable").append(cella);
     }
+    
      $("#btnMescola").click(function(){
      	alert("Rimescolare le celle")
       });
@@ -31,6 +35,6 @@ $(document).ready(function()
 
   function clickCell(id) 
   {
-	alert(id);
+	alert($("#mainTable").children("#"+id).attr("id"));
    }
  
