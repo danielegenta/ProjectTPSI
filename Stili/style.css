@@ -96,3 +96,18 @@ ul
 	border-radius: 40px;
 	font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
+
+.bottomButton 
+{
+	padding: 14px 40px;
+	font-size: 14px;
+	line-height: 100%;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+	color: #fff;
+	background-color: #222;
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	font-weight: bold;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
