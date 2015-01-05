@@ -38,12 +38,12 @@
 body 
 {
 	background:
-radial-gradient(black 15%, transparent 16%) 0 0,
-radial-gradient(black 15%, transparent 16%) 8px 8px,
-radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
-radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
-background-color:#282828;
-background-size:16px 16px;
+		radial-gradient(black 15%, transparent 16%) 0 0,
+		radial-gradient(black 15%, transparent 16%) 8px 8px,
+		radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+		radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+	background-color:#282828;
+	background-size:16px 16px;
 }
 
 #Titolo1 
@@ -52,22 +52,27 @@ background-size:16px 16px;
 	text-shadow: 0px 2px 3px #555;
 	font: 70px Tahoma, Helvetica, Arial, Sans-Serif;
 	text-align: center;
-	background:#474747;
 	width:600px;
 	border-radius:10px;
 }
 
 .bottomTable
 {
-	background:#474747;
-	border-radius:20px;
-	width:300px;
-	text-align:center;
+	color: #222;
+	text-shadow: 0px 2px 3px #555;
+	font: 20px Tahoma, Helvetica, Arial, Sans-Serif;
+	text-align: center;
+	width:550px;
+	border-radius:10px;
 }
 
-ul
+.background
 {
-		background:#474747;
+	background:#474747;
+	width:600px;
+	border-radius:20px;
+	
+
 }
 
 .middleButton 
