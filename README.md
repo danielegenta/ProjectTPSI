@@ -13,10 +13,14 @@ Changelog-Major updates
 0.1 Aggiunta dei file (html, css e js)
 0.2 Scheletro file html e collegamento fra i tre file principali
 0.3 Creazione tabella; aggiunta presentazione; aggiunta links utili; bug fixed; aggiunta funzione di click su cella
-0.4 Inserimento di timer e contatore mosse; bug fixed; documentation fixed
+0.4 Inserimento di timer e contatore mosse, documentation fixed
 0.5 Ottimizzazione grafica 
-0.6 Documentazione, semplificazione e alleggerimento del codice; miglioramento timer
-0.7 Inserimento di modalità shuffle (mescola), nuova partita e miglioramenti generali.
+0.6 Documentation fixed; semplificazione e alleggerimento del codice; miglioramento timer
+0.7 Inserimento di modalità shuffle (mescola); aggiunta animazioni bottoni
+0.8 Inserimento di modalità nuova partita; animazioni e paragrafi interattivi
+0.9 Pulizia e ottimizzazione generale del codice; completati paragrafi interattivi; documentation fixed.
+
+Ogni versione contiene correzione di bug e miglioramenti generali.
 
 //
 

@@ -54,17 +54,17 @@ $(document).ready(function()
     });
 	//Evento click su come si gioca 
 	$("#btnHowTo").click(function(){
-		testoParagrafo="Qui come si gioca"
+		testoParagrafo="L'obiettivo del gioco e' quello di formare una scala crescente, da uno a quindici, con le caselle a disposizione.Per raggiungere questo obiettivo e' necessario spostare le varie caselle sfruttando la sedicesima che e' vuota.E' possibile usufruire di una funzione pausa la quale ferma il timer e inibisce il proseguimento del gioco fintanto che rimane attivaUlteriori strumenti sono il timer anche se non ci sono limiti di tempo (se non il vostro record) e il contatore di mosse (anche qui non vi sono limiti.Il gioco e' strutturato in modo da essere sempre risolvibile con un numero finito di mosse, per ulteriori informazioni cliccare sull'apposito bottone.";
 		stampaParagrafo(testoParagrafo);
 	});
 	//Evento click su informazioni
 	$("#btnCrediti").click(function(){
-		testoParagrafo="Qui crediti"
+		testoParagrafo="Il progetto e' stato interamente sviluppato da: Daniele Genta, Davide Massimino, Mite Nikolov e Samuele Levrone.Vedere la cartella links utili per ulteriori informazioni sugli stili."
 		stampaParagrafo(testoParagrafo);
 	});
 	//Evento click su crediti
 	$("#btnInformazioni").click(function(){
-		testoParagrafo="Qui informazioni"
+		testoParagrafo="Il gioco del 15 non e' sempre risolvibile, esso infatti puo' risultare impossbile da risolvere con un numero finito di mosse.Per stabilire la risolvibilita' della matrice e' necessario utilizzare la matematica.Occorre infatti calcolare per ogni numero (eccetto l'uno) da quanti numeri minori di se stesso e' seguito (scorrere la matrice da sx a dx). Dopo avere sommato tutte queste occorrenze se la somma e' pari: la matrice e' risolvibile, viceversa non lo e'. Fonti: vedere liks utili."
 		stampaParagrafo(testoParagrafo);
 	});
 });
