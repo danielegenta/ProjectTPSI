@@ -66,20 +66,12 @@ body
 	border-radius:10px;
 }
 
-.background
+.background, ul, p
 {
 	background:#474747;
 	width:600px;
 	border-radius:20px;
 }
-
-ul
-{
-	background:#474747;
-	width:600px;
-	border-radius:20px;
-}
-
 
 .middleButton 
 {

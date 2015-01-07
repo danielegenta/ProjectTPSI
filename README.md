@@ -16,6 +16,7 @@ Changelog-Major updates
 0.4 Inserimento di timer e contatore mosse; bug fixed; documentation fixed
 0.5 Ottimizzazione grafica 
 0.6 Documentazione, semplificazione e alleggerimento del codice; miglioramento timer
+0.7 Inserimento di modalità shuffle (mescola), nuova partita e miglioramenti generali.
 
 //
 
