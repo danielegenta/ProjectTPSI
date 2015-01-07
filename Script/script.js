@@ -87,8 +87,10 @@ function randNum(min,max)
 //Evento click su una cella della tabella
   function clickCell(id) 
   {
+  	if (pausa==false)
+  	{
   	//Il clic su una cella annulla la pausa
-  	pausa=false;
+  	//pausa=false;
   	var aumentaMosse=true;
   	//Recupero il numero di mosse corrente
   	var numeroMosse=parseInt($("#mosse").text())
@@ -126,6 +128,11 @@ function randNum(min,max)
 	}
 	//Ripristino lo stato della variabile ausiliatia
 	aumentaMosse=true;
+	}
+	else
+	{
+		alert("gioco in pausa, cliccare riavvia per continuare la partita");
+	}
    }
   
 //Ottimizzare con un while 
