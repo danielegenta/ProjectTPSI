@@ -1,7 +1,7 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
 //Variabili per cronometro
 var stringaTempo = "00:00";
-var scorriTempo = false, pausa=false, vincita=false;
+var scorriTempo = false, pausa=false, vincita=false,newPartita=false;
 var velocitaCronometro = 1000;
 var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec;
 //Setto impostazioni
@@ -39,6 +39,7 @@ $(document).ready(function()
     });
     //Evento click su nuova partita
     $("#btnNuovaPartita").click(function(){
+    	newPartita=true;
     	mescolaCelle();
     	nuovaPartita();
     });
@@ -117,18 +118,15 @@ function controlloVincita()
 	//Se ho vinto fermo il cronometro e mostro i dettagli della partita
 	if (vincita==true)
 	{
-		vincita=true;
 		switchCronometro();
 		alert("HAI VINTO!!!\n\nTEMPO("+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+")\nMOSSE("+$("#mosse").text()+")");
-		//alert("Clicca su nuova partita per iniziare un altro match!");
-		
 	}
 }   
 
 //Funzione che si occupa di mescolare le celle (testo)
 function mescolaCelle() 
 {
-		var aus,r,lunghezza=14;
+	var aus,r,lunghezza=14;
 		numeri=new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
 		for(var i=0;i<15;i++)
 		{
@@ -139,14 +137,15 @@ function mescolaCelle()
 			numeri[r]=aus;
 			lunghezza--;
 		}
-
 }
 
 //Funzione che inizializza le impostazione della partita
 function nuovaPartita()
 {
-	$("#mosse").html(0);
+	vincita=false;
 	switchCronometro();
+	$("#mosse").html(0);
+	mescolaCelle();
 }
 
 
@@ -170,11 +169,13 @@ function switchCronometro()
         else if (scorriTempo==true)
         {
             scorriTempo = false;
-                       /* if (pausa==true)
-            {
-            	clearInterval(cronometro);
-            }*/
-        }       
+        	if (newPartita==true)
+        	{
+        		clearInterval(cronometro);
+        		switchCronometro();
+        	}
+        }   
+        
 }
 
 //Misura il tempo e lo stampa
