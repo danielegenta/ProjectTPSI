@@ -51,8 +51,29 @@ $(document).ready(function()
     		$("#btnPausa").html("Pausa");
     	pausa=!pausa;
     });
+	$("#btnMescola").click(function(){
+		mescolaCelle();
+	});
+	//mescolamento-----------------------------------------
+function mescolaCelle(){
+	var aus,r,lunghezza=14;
+		numeri=new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+		for(var i=0;i<15;i++)
+		{
+			r=randNum(0,lunghezza);
+			$("#mainTable").children().eq(i).text(numeri[r]);
+			aus=numeri[lunghezza];
+			numeri[lunghezza]=numeri[r];
+			numeri[r]=aus;
+			lunghezza--;
+		}
+}
 });
-
+//numero casuale--------------------
+function randNum(min,max){
+var m=min;
+var n=max;
+var r=m+Math.round(Math.random()*n); return(r); }
 //Ottimizzare
 //Evento click su una cella della tabella
   function clickCell(id) 
@@ -111,8 +132,8 @@ function controlloVincita()
 	//Se ho vinto fermo il cronometro e mostro i dettagli della partita
 	if (vincita==true)
 	{
-		alert("hai vinto (aggiungere dettagli: numero mosse e tempo");
-		alert("Clicca su nuova partita per iniziare un altro match!")
+		alert("HAI VINTO!!!\n\nTEMPO("+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+")\nMOSSE("+$("#mosse").text()+")");
+		alert("Clicca su nuova partita per iniziare un altro match!");
 		switchCronometro();
 	}
 }   
@@ -140,7 +161,7 @@ function switchCronometro()
                 avviaCronometro();
             },velocitaCronometro);
         }
-        else if (scorriTempo==false)
+        else if (scorriTempo==true)
         {
             scorriTempo = false;
             if (pausa==true)
