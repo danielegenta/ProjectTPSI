@@ -1,7 +1,7 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
 //Variabili per cronometro
 var stringaTempo = "00:00";
-var scorriTempo = false, pausa=false;
+var scorriTempo = false, pausa=false, vincita=false;
 var velocitaCronometro = 1000;
 var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec;
 //Setto impostazioni
@@ -30,7 +30,6 @@ $(document).ready(function()
         cella.html(contenutoDiv);
         //Appendo al padre i div figli
         $("#mainTable").append(cella);
-        //fare mescola
     }
     //Mescolo le celle per iniziare la partita da uno stato di non-vincita
     mescolaCelle();
@@ -54,20 +53,6 @@ $(document).ready(function()
 	$("#btnMescola").click(function(){
 		mescolaCelle();
 	});
-	//mescolamento-----------------------------------------
-function mescolaCelle(){
-	var aus,r,lunghezza=14;
-		numeri=new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
-		for(var i=0;i<15;i++)
-		{
-			r=randNum(0,lunghezza);
-			$("#mainTable").children().eq(i).text(numeri[r]);
-			aus=numeri[lunghezza];
-			numeri[lunghezza]=numeri[r];
-			numeri[r]=aus;
-			lunghezza--;
-		}
-}
 });
 //numero casuale--------------------
 function randNum(min,max){
@@ -123,7 +108,7 @@ var r=m+Math.round(Math.random()*n); return(r); }
 //Controllo la vincita mediante il confronto fra il testo e gli id (che sono ordinati in modo crescente)
 function controlloVincita()
 {
-	var vincita=true;
+	vincita=true;
 	for (i=0; i<15; i++)
 	{
 		if ($("#mainTable").children().eq(i).text()!=parseInt($("#mainTable").children().eq(i).attr("id"))+1)
@@ -132,14 +117,30 @@ function controlloVincita()
 	//Se ho vinto fermo il cronometro e mostro i dettagli della partita
 	if (vincita==true)
 	{
-		alert("HAI VINTO!!!\n\nTEMPO("+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+")\nMOSSE("+$("#mosse").text()+")");
-		alert("Clicca su nuova partita per iniziare un altro match!");
+		vincita=true;
 		switchCronometro();
+		alert("HAI VINTO!!!\n\nTEMPO("+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+")\nMOSSE("+$("#mosse").text()+")");
+		//alert("Clicca su nuova partita per iniziare un altro match!");
+		
 	}
 }   
 
 //Funzione che si occupa di mescolare le celle (testo)
-function mescolaCelle() {}
+function mescolaCelle() 
+{
+		var aus,r,lunghezza=14;
+		numeri=new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+		for(var i=0;i<15;i++)
+		{
+			r=randNum(0,lunghezza);
+			$("#mainTable").children().eq(i).text(numeri[r]);
+			aus=numeri[lunghezza];
+			numeri[lunghezza]=numeri[r];
+			numeri[r]=aus;
+			lunghezza--;
+		}
+
+}
 
 //Funzione che inizializza le impostazione della partita
 function nuovaPartita()
@@ -156,24 +157,29 @@ function switchCronometro()
 {   	
         if(scorriTempo == false) 
         {            
+        	if (pausa==true)
+        	avviaCronometro();
+        	else
+        	{
             stringaTempo = "00:00";
             cronometro = setInterval(function() {
                 avviaCronometro();
             },velocitaCronometro);
+            }
         }
         else if (scorriTempo==true)
         {
             scorriTempo = false;
-            if (pausa==true)
+                       /* if (pausa==true)
             {
             	clearInterval(cronometro);
-            }
+            }*/
         }       
 }
 
 //Misura il tempo e lo stampa
 function avviaCronometro(){
-	if (pausa==false)
+	if (pausa==false  && vincita==false)
 	{
 	scorriTempo = true;
     decineMinuti = parseInt(stringaTempo.charAt(0));
@@ -210,6 +216,7 @@ function avviaCronometro(){
                 {
                     centesimiSecondo++;
                 }
+                
         //Stampo il tempo
         stringaTempo = String(decineMinuti) + String(unitaMinuti) + String(separatoreMinSec) + String(decimiSecondo) + String(centesimiSecondo);
         for ( var i = 0; i < stringaTempo.length; i++ ) {
