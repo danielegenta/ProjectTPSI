@@ -17,7 +17,7 @@ $(document).ready(function()
         var contenutoDiv;
         if(i == 15) 
         {
-            contenutoDiv = "X";
+            contenutoDiv = "";
         }
         else
         {
@@ -91,31 +91,35 @@ function randNum(min,max)
   	{
   	//Il clic su una cella annulla la pausa
   	//pausa=false;
+  	alert(id);
+  	alert(id-4);
   	var aumentaMosse=true;
   	//Recupero il numero di mosse corrente
   	var numeroMosse=parseInt($("#mosse").text())
   	//Variabile ausiliaria utile allo scambio del testo
 	var testo=$("#mainTable").children().eq(id).text();
 	//Spostamenti sinistra, destra, giu o su
-	if ($("#mainTable").children().eq(id+1).text()=="X" && id<16)
+	if ($("#mainTable").children().eq(id+1).text()=="" && id<16)
 	{
 		$("#mainTable").children().eq(id+1).html(testo);
-		$("#mainTable").children().eq(id).html("X");
+		$("#mainTable").children().eq(id).html("");
 	}
-	else if ($("#mainTable").children().eq(id-1).text()=="X" && id>0)
+	else if ($("#mainTable").children().eq(id-1).text()=="" && id>0)
 	{
 		$("#mainTable").children().eq(id-1).html(testo);
-		$("#mainTable").children().eq(id).html("X");
+		$("#mainTable").children().eq(id).html("");
 	}
-	else if ($("#mainTable").children().eq(id+4).text()=="X")
+	else if ($("#mainTable").children().eq(id+4).text()=="")
 	{
+		alert("giu");
 		$("#mainTable").children().eq(id+4).html(testo);
-		$("#mainTable").children().eq(id).html("X");
+		$("#mainTable").children().eq(id).html("");
 	}
-	else if ($("#mainTable").children().eq(id-4).text()=="X")
+	else if ($("#mainTable").children().eq(id-4).text()=="")
 	{
 		$("#mainTable").children().eq(id-4).html(testo);
-		$("#mainTable").children().eq(id).html("X");
+		$("#mainTable").children().eq(id).html("");
+		alert("su");
 	}
 	//Se nessuna cella è stata spostata non incremento il contatore di mosse, viceversa lo aumento di uno e controllo se ho vinto
 	else
