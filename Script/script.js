@@ -1,7 +1,7 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
 //Variabili per cronometro
 var stringaTempo = "00:00", testoParagrafo="";
-var i;
+var i,j;
 var scorriTempo = false, pausa=false, vincita=false,newPartita=false, risolvibilita=true;
 var velocitaCronometro = 1000;
 var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec;
@@ -33,7 +33,7 @@ $(document).ready(function()
     }
     //Mescolo le celle per iniziare la partita da uno stato di non-vincita
     mescolaCelle();
-    	//Avvio cronometro
+    //Avvio cronometro
     switchCronometro();
     //Evento click su mescola celle
     $("#btnMescola").click(function(){
@@ -44,6 +44,7 @@ $(document).ready(function()
     	newPartita=true;
     	nuovaPartita();
     });
+    //Evento click su pausa (riavvio o stop del gioco)
      $("#btnPausa").click(function(){
     	switchCronometro();
     	if (pausa==false)
@@ -52,23 +53,24 @@ $(document).ready(function()
     		$("#btnPausa").html("Pausa");
     	pausa=!pausa;
     });
-	$("#btnMescola").click(function(){
-		mescolaCelle();
-	});
+	//Evento click su come si gioca 
 	$("#btnHowTo").click(function(){
 		testoParagrafo="Qui come si gioca"
 		stampaParagrafo(testoParagrafo);
 	});
+	//Evento click su informazioni
 	$("#btnCrediti").click(function(){
 		testoParagrafo="Qui crediti"
 		stampaParagrafo(testoParagrafo);
 	});
+	//Evento click su crediti
 	$("#btnInformazioni").click(function(){
 		testoParagrafo="Qui informazioni"
 		stampaParagrafo(testoParagrafo);
 	});
 });
 
+//Funzione che nascone/mostra paragrafo rispetto al bottone cliccato
 function stampaParagrafo(testoP)
 {
 		$("p").hide("fast");
@@ -76,13 +78,7 @@ function stampaParagrafo(testoP)
 		$("p").show("slow");
 }
 
-//numero casuale
-function randNum(min,max)
-{
-	var m=min;
-	var n=max;
-	var r=m+Math.round(Math.random()*n); return(r);
-}
+
 //Ottimizzare
 //Evento click su una cella della tabella
   function clickCell(id) 
@@ -99,25 +95,19 @@ function randNum(min,max)
   	//Variabile ausiliaria utile allo scambio del testo
 	var testo=$("#mainTable").children().eq(id).text();
 	//Spostamenti sinistra, destra, giu o su
-	
 	if ($("#mainTable").children().eq(id+1).text()=="" && id<16 && $("#mainTable").children().eq(id+1).attr("id")!=undefined)
 	{
-		alert("sx");
 		alert($("#mainTable").children().eq(id+1).attr("id"));
 		$("#mainTable").children().eq(id+1).html(testo);
-		$("#mainTable").children().eq(id).html("");
-		
+		$("#mainTable").children().eq(id).html("");	
 	}
 	else if ($("#mainTable").children().eq(id-1).text()=="" && id>0 && $("#mainTable").children().eq(id-1).attr("id")!=undefined)
 	{
-		alert("dx");
 		$("#mainTable").children().eq(id-1).html(testo);
 		$("#mainTable").children().eq(id).html("");
-		
 	}
 	else if ($("#mainTable").children().eq(id+4).text()=="" && $("#mainTable").children().eq(id+4).attr("id")!=undefined)
 	{
-		alert("giu");
 		$("#mainTable").children().eq(id+4).html(testo);
 		$("#mainTable").children().eq(id).html("");
 	}
@@ -125,7 +115,7 @@ function randNum(min,max)
 	{
 		$("#mainTable").children().eq(id-4).html(testo);
 		$("#mainTable").children().eq(id).html("");
-		alert("su");
+
 	}
 	//Se nessuna cella è stata spostata non incremento il contatore di mosse, viceversa lo aumento di uno e controllo se ho vinto
 	else
@@ -145,25 +135,27 @@ function randNum(min,max)
 	}
    }
   
-//Ottimizzare con un while 
 //Controllo la vincita mediante il confronto fra il testo e gli id (che sono ordinati in modo crescente)
 function controlloVincita()
 {
 	vincita=true;
-	for (i=0; i<15; i++)
+	i=0;
+	do
 	{
 		if ($("#mainTable").children().eq(i).text()!=parseInt($("#mainTable").children().eq(i).attr("id"))+1)
 			vincita=false;
+		i++;
 	}
+	while (vincita==false || i<15)
 	//Se ho vinto fermo il cronometro e mostro i dettagli della partita
 	if (vincita==true)
 	{
 		switchCronometro();
-		alert("HAI VINTO!!!\n\nTEMPO("+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+")\nMOSSE("+$("#mosse").text()+")");
+		alert("HAI VINTO!!!\n\nTEMPO: "+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+"\nMOSSE: "+$("#mosse").text()+"");
 	}
 }   
 
-//Funzione che si occupa di mescolare le celle (testo)
+//Funzione che si occupa di mescolare le celle (il testo) appoggiandosi ad un vettore
 function mescolaCelle() 
 {
 		var aus,r,lunghezza;
@@ -186,17 +178,26 @@ function mescolaCelle()
         while (risolvibilita==false)
 }
 
+//Funzione di generazione di un numero casuale
+function randNum(min,max)
+{
+	var m=min;
+	var n=max;
+	var r=m+Math.round(Math.random()*n); return(r);
+}
+
+//Funzione che controlla se la matrice è risolvibile (vedere documentazione per ulteriori informazioni)
 function controlloRisolvibilita()
 {
 	risolvibilita=true;
-	var n1=0, n2=0, z,k;
+	var n1=0, n2=0;
 	var somma=0, conta=0;
-	for ( k=0; k<15; k++)
+	for ( i=0; i<15; i++)
 	{
-		n1=parseInt($("#mainTable").children().eq(k).text());
-		for ( z=k+1; z<15; z++)
+		n1=parseInt($("#mainTable").children().eq(i).text());
+		for ( j=i+1; j<15; j++)
 			{
-				n2=parseInt($("#mainTable").children().eq(z).text());
+				n2=parseInt($("#mainTable").children().eq(j).text());
 				if (n1>n2)
 					conta++;
 			}
@@ -207,7 +208,7 @@ function controlloRisolvibilita()
 		risolvibilita=false;
 }
 
-//Funzione che inizializza le impostazione della partita
+//Funzione che inizializza le impostazioni della partita
 function nuovaPartita()
 {
 	vincita=false;
