@@ -84,37 +84,28 @@ function stampaParagrafo(testoP)
   {
   	if (pausa==false)
   	{
-  	var aumentaMosse=true;
   	//Recupero il numero di mosse corrente
   	var numeroMosse=parseInt($("#mosse").text())
   	//Variabile ausiliaria utile allo scambio del testo
 	var testo=$("#mainTable").children().eq(id).text();
+	possibiliSpostamenti= new Array(-1,1,-4,4);
+	var spostato=false;
+	var obiettivo, i=0;
 	//Spostamenti sinistra, destra, giu o su
-	if ($("#mainTable").children().eq(id+1).text()=="" && id<16 && $("#mainTable").children().eq(id+1).attr("id")!=undefined)
+	do
 	{
-		$("#mainTable").children().eq(id+1).html(testo);
-		$("#mainTable").children().eq(id).html("");	
+			obiettivo=(possibiliSpostamenti[i]);
+			if ($("#mainTable").children().eq(id+obiettivo).text()=="" && id<16 && $("#mainTable").children().eq(obiettivo).attr("id")!=undefined)
+			{
+				$("#mainTable").children().eq(id+obiettivo).html(testo);
+				$("#mainTable").children().eq(id).html("");	
+				spostato=true;
+			}
+			i++;		
 	}
-	else if ($("#mainTable").children().eq(id-1).text()=="" && id>0 && $("#mainTable").children().eq(id-1).attr("id")!=undefined)
-	{
-		$("#mainTable").children().eq(id-1).html(testo);
-		$("#mainTable").children().eq(id).html("");
-	}
-	else if ($("#mainTable").children().eq(id+4).text()=="" && $("#mainTable").children().eq(id+4).attr("id")!=undefined)
-	{
-		$("#mainTable").children().eq(id+4).html(testo);
-		$("#mainTable").children().eq(id).html("");
-	}
-	else if ($("#mainTable").children().eq(id-4).text()=="" && $("#mainTable").children().eq(id-4).attr("id")!=undefined)
-	{
-		$("#mainTable").children().eq(id-4).html(testo);
-		$("#mainTable").children().eq(id).html("");
-
-	}
+	while (spostato==false && i<4)
 	//Se nessuna cella è stata spostata non incremento il contatore di mosse, viceversa lo aumento di uno e controllo se ho vinto
-	else
-		aumentaMosse=false;
-	if (aumentaMosse==true)
+	if (spostato==true)
 	{		
 		numeroMosse+=1;
 		$("#mosse").html(numeroMosse);
