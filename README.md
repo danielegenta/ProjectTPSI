@@ -5,7 +5,7 @@ Progetto di TPSI consistente nel creare il gioco del 15 utilizzando HTML, CSS, J
 
 //
 
-Questo è il file di documentazione!
+Questo è il file di documentazione.
 
 //
 
