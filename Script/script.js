@@ -9,7 +9,6 @@ var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec
 $(document).ready(function()
 {	
 	$("p").hide();
-
     //Riempo il contenitore principale con le caselle (div)
 	for (i = 0; i < 16; i++) 
 	{	
@@ -85,10 +84,6 @@ function stampaParagrafo(testoP)
   {
   	if (pausa==false)
   	{
-  	//Il clic su una cella annulla la pausa
-  	//pausa=false;
-  	alert(id);
-  	alert(id-4);
   	var aumentaMosse=true;
   	//Recupero il numero di mosse corrente
   	var numeroMosse=parseInt($("#mosse").text())
@@ -97,7 +92,6 @@ function stampaParagrafo(testoP)
 	//Spostamenti sinistra, destra, giu o su
 	if ($("#mainTable").children().eq(id+1).text()=="" && id<16 && $("#mainTable").children().eq(id+1).attr("id")!=undefined)
 	{
-		alert($("#mainTable").children().eq(id+1).attr("id"));
 		$("#mainTable").children().eq(id+1).html(testo);
 		$("#mainTable").children().eq(id).html("");	
 	}
@@ -138,7 +132,7 @@ function stampaParagrafo(testoP)
 //Controllo la vincita mediante il confronto fra il testo e gli id (che sono ordinati in modo crescente)
 function controlloVincita()
 {
-	vincita=true;
+	vincita=false;
 	i=0;
 	do
 	{
@@ -146,7 +140,7 @@ function controlloVincita()
 			vincita=false;
 		i++;
 	}
-	while (vincita==false || i<15)
+	while (vincita==false && i<15)
 	//Se ho vinto fermo il cronometro e mostro i dettagli della partita
 	if (vincita==true)
 	{
