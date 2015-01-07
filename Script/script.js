@@ -99,23 +99,29 @@ function randNum(min,max)
   	//Variabile ausiliaria utile allo scambio del testo
 	var testo=$("#mainTable").children().eq(id).text();
 	//Spostamenti sinistra, destra, giu o su
-	if ($("#mainTable").children().eq(id+1).text()=="" && id<16)
+	
+	if ($("#mainTable").children().eq(id+1).text()=="" && id<16 && $("#mainTable").children().eq(id+1).attr("id")!=undefined)
 	{
+		alert("sx");
+		alert($("#mainTable").children().eq(id+1).attr("id"));
 		$("#mainTable").children().eq(id+1).html(testo);
 		$("#mainTable").children().eq(id).html("");
+		
 	}
-	else if ($("#mainTable").children().eq(id-1).text()=="" && id>0)
+	else if ($("#mainTable").children().eq(id-1).text()=="" && id>0 && $("#mainTable").children().eq(id-1).attr("id")!=undefined)
 	{
+		alert("dx");
 		$("#mainTable").children().eq(id-1).html(testo);
 		$("#mainTable").children().eq(id).html("");
+		
 	}
-	else if ($("#mainTable").children().eq(id+4).text()=="")
+	else if ($("#mainTable").children().eq(id+4).text()=="" && $("#mainTable").children().eq(id+4).attr("id")!=undefined)
 	{
 		alert("giu");
 		$("#mainTable").children().eq(id+4).html(testo);
 		$("#mainTable").children().eq(id).html("");
 	}
-	else if ($("#mainTable").children().eq(id-4).text()=="")
+	else if ($("#mainTable").children().eq(id-4).text()=="" && $("#mainTable").children().eq(id-4).attr("id")!=undefined)
 	{
 		$("#mainTable").children().eq(id-4).html(testo);
 		$("#mainTable").children().eq(id).html("");
