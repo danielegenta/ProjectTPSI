@@ -10,13 +10,21 @@
 	<body>
 	<center>
 	<div class="background">
-		<h1><div id="Titolo1">GIOCO DEL 15</div></h1>
+		<h1><div id="Titolo">GIOCO DEL 15</div></h1>
+		<!--Bottoni che cambiano css dinamicamente-->
+		<button type="button" id="btnGraficaMinimal" class="topButton">Minimal</button>
+		<button type="button" id="btnGraficaDark" class="topButton">Dark</button>
+		<button type="button" id="btnGraficaVintage" class="topButton">Vintage</button>
+		<br><br>
+		<!--contenitore Tabella-->
 		<div id="mainTable">
 		</div>
+		<!--Bottoni intermedi-->
 		<button type="button" id="btnNuovaPartita" class="middleButton">Nuova partita</button>
 		<button type="button" id="btnMescola" class="middleButton">Mescola</button>
 		<button type="button" id="btnPausa" class="middleButton">Pausa</button>
 		<br>
+		<!--Tabella contenente timer e contatore di mosse-->
 		<table class="bottomTable">
 			<tr>
 				<td>
@@ -43,6 +51,7 @@
 		</table> 
 		</div>
 		<br>
+		<!--Menu inferiore-->
 		<button type="button" id="btnInformazioni" class="bottomButton">Informazioni</button>
 		<button type="button" id="btnCrediti" class="bottomButton">Crediti</button>
 		<button type="button" id="btnHowTo" class="bottomButton">Come si gioca</button>

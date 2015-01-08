@@ -67,6 +67,23 @@ $(document).ready(function()
 		testoParagrafo="Il gioco del 15 non e' sempre risolvibile, esso infatti puo' risultare impossbile da risolvere con un numero finito di mosse.Per stabilire la risolvibilita' della matrice e' necessario utilizzare la matematica.Occorre infatti calcolare per ogni numero (eccetto l'uno) da quanti vettoreTestoCelle minori di se stesso e' seguito (scorrere la matrice da sx a dx). Dopo avere sommato tutte queste occorrenze se la somma e' pari: la matrice e' risolvibile, viceversa non lo e'. Fonti: vedere liks utili."
 		stampaParagrafo(testoParagrafo);
 	});
+	//Cambio di grafica, ottimizzare!
+	$("#btnGraficaMinimal").click(function(){
+		$("body").css({
+							"color": "black",
+      				  		"background": "#e2e2e2"
+      						
+    					});
+    	$("#Titolo, .bottomTable").css("color","black");
+		$(".background, p").css("background","lightgrey");
+		$(".celleTabella").css({
+      								"background": "#f0f9ff",
+    						   });
+    	$(".topButton, .middleButton, .bottomButton").css({
+      				  		"background": "#fcfff4",
+      						"color": "black"
+    					});
+	});
 });
 
 //Funzione che nascone/mostra paragrafo rispetto al bottone cliccato
@@ -290,4 +307,6 @@ function avviaCronometro(){
         }
     }
 }
+
+
  
