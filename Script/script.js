@@ -3,12 +3,14 @@
 var stringaTempo = "00:00", testoParagrafo="";
 var i,j, aus,nCasuale;
 var scorriTempo = false, pausa=false, vincita=false,newPartita=false, risolvibilita=true;
+var giocatore;
 var velocitaCronometro = 1000;
 var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec;
 //Setto impostazioni
 $(document).ready(function()
 {	
 	$("p").hide();
+	giocatore=prompt("Inserire nome giocatore", "");
     //Riempo il contenitore principale con le caselle (div)
 	for (i = 0; i < 16; i++) 
 	{	
@@ -177,7 +179,7 @@ function controlloVincita()
 	if (vincita==true)
 	{
 		switchCronometro();
-		alert("HAI VINTO!!!\n\nTEMPO: "+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+"\nMOSSE: "+$("#mosse").text()+"");
+		alert("Complimenti"+giocatore+"!!!\n\nTEMPO: "+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+"\nMOSSE: "+$("#mosse").text()+"");
 	}
 }   
 
@@ -254,6 +256,7 @@ function nuovaPartita()
 	mescolaCelle();
 	pausa=false;
 	newPartita=false;
+	giocatore=prompt("Inserire nome giocatore", "");
 }
 
 
