@@ -1,7 +1,7 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
 //Variabili per cronometro
 var stringaTempo = "00:00", testoParagrafo="";
-var i,j;
+var i,j, aus,r;
 var scorriTempo = false, pausa=false, vincita=false,newPartita=false, risolvibilita=true;
 var velocitaCronometro = 1000;
 var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec;
@@ -95,8 +95,9 @@ function stampaParagrafo(testoP)
 	do
 	{
 			obiettivo=(possibiliSpostamenti[i]);
-			if ($("#mainTable").children().eq(id+obiettivo).text()=="" && id<16 && $("#mainTable").children().eq(obiettivo).attr("id")!=undefined)
+			if ($("#mainTable").children().eq(id+obiettivo).text()=="" && $("#mainTable").children().eq(id+obiettivo).attr("id")!=undefined)
 			{
+				alert(id+obiettivo);
 				$("#mainTable").children().eq(id+obiettivo).html(testo);
 				$("#mainTable").children().eq(id).html("");	
 				spostato=true;
@@ -143,12 +144,14 @@ function controlloVincita()
 //Funzione che si occupa di mescolare le celle (il testo) appoggiandosi ad un vettore
 function mescolaCelle() 
 {
-		var aus,r,lunghezza;
+		aus=0;
+		r=0;
+		puliziaCelle();
 		do 
 		{
 		lunghezza=14;
 		numeri=new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
-		for(i=0;i<15;i++)
+		for (i=0;i<15;i++)
 		{	
 			r=randNum(0,lunghezza);
 			$("#mainTable").children().eq(i).text(numeri[r]);
@@ -170,6 +173,14 @@ function randNum(min,max)
 	var n=max;
 	var r=m+Math.round(Math.random()*n); return(r);
 }
+
+function puliziaCelle() 
+{
+	for (i=0; i<15;i++)
+	{
+		$("#mainTable").children().eq().text("");
+	}
+} 
 
 //Funzione che controlla se la matrice è risolvibile (vedere documentazione per ulteriori informazioni)
 function controlloRisolvibilita()
