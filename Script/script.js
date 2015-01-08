@@ -165,27 +165,42 @@ function stampaParagrafo(testoP)
 //Controllo la vincita mediante il confronto fra il testo e gli id (che sono ordinati in modo crescente)
 function controlloVincita()
 {
-	vincita=false;
-	i=0;
-	do
+	vincita=true;
+	i=0, n=0;
+	for (j=0; j<15;j++)
 	{
-		if ($("#mainTable").children().eq(i).text()!=parseInt($("#mainTable").children().eq(i).attr("id"))+1)
+		var n=parseInt($("#mainTable").children().eq(j).attr("id"));
+		n+=1;
+		if ($("#mainTable").children().eq(j).text()!=n)
+		{
 			vincita=false;
-		i++;
+		}
 	}
-	while (vincita==false && i<15)
 	//Se ho vinto fermo il cronometro e mostro i dettagli della partita
 	if (vincita==true)
 	{
 		switchCronometro();
-		alert("Complimenti"+nomeGiocatore+"!!!\n\nTEMPO: "+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+"\nMOSSE: "+$("#mosse").text()+"");
+		vittoria();
 	}
 }   
+
+function vittoria()
+{
+	alert("Complimenti"+nomeGiocatore+"!!!\n\nTEMPO: "+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+"\nMOSSE: "+$("#mosse").text()+"");
+	var carattere="",stringaVittoria="Complimenti!!!!!";
+	var schermataVittoria=setInterval(function(){
+		carattere=stringaVittoria.substring(i,i+1);
+		$("#mainTable").children().eq(i).html(carattere);
+		i++;
+		if (i==16)
+		clearInterval(schermataVittoria);
+	},100);
+}
 
 //Funzione che si occupa di mescolare le celle (il testo) appoggiandosi ad un vettore
 function mescolaCelle() 
 {
-		aus=0;
+		/*aus=0;
 		nCasuale=0;
 		puliziaCelle();
 		do 
@@ -204,7 +219,7 @@ function mescolaCelle()
 		controlloRisolvibilita();
 		alert("e' possibile risolvere: "+risolvibilita);
         }
-        while (risolvibilita==false)
+        while (risolvibilita==false)*/
 }
 
 //Funzione di generazione di un numero casuale
