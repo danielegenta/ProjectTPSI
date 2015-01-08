@@ -200,7 +200,7 @@ function vittoria()
 //Funzione che si occupa di mescolare le celle (il testo) appoggiandosi ad un vettore
 function mescolaCelle() 
 {
-		/*aus=0;
+		aus=0;
 		nCasuale=0;
 		puliziaCelle();
 		do 
@@ -219,7 +219,7 @@ function mescolaCelle()
 		controlloRisolvibilita();
 		alert("e' possibile risolvere: "+risolvibilita);
         }
-        while (risolvibilita==false)*/
+        while (risolvibilita==false)
 }
 
 //Funzione di generazione di un numero casuale
