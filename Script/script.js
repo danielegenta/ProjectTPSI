@@ -10,7 +10,7 @@ var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec
 $(document).ready(function()
 {	
 	$("p").hide();
-	giocatore=prompt("Inserire nome giocatore", "");
+	inputGiocatore();
     //Riempo il contenitore principale con le caselle (div)
 	for (i = 0; i < 16; i++) 
 	{	
@@ -256,9 +256,16 @@ function nuovaPartita()
 	mescolaCelle();
 	pausa=false;
 	newPartita=false;
-	giocatore=prompt("Inserire nome giocatore", "");
+	inputGiocatore();
 }
 
+function inputGiocatore()
+{
+	giocatore=prompt("Inserire nome giocatore", "");
+	if (giocatore=="")
+		giocatore="Player 1";
+	$("#nomeGiocatore").html(giocatore);
+}
 
 //Funzioni legate a cronometro
 //tutto da rivedere ottimizzare
