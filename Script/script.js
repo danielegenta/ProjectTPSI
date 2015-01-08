@@ -1,7 +1,7 @@
 //Al caricamento del DOM inizializzo la tabella (creo sotto-div)
 //Variabili per cronometro
 var stringaTempo = "00:00", testoParagrafo="";
-var i,j, aus,r;
+var i,j, aus,nCasuale;
 var scorriTempo = false, pausa=false, vincita=false,newPartita=false, risolvibilita=true;
 var velocitaCronometro = 1000;
 var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec;
@@ -64,7 +64,7 @@ $(document).ready(function()
 	});
 	//Evento click su crediti
 	$("#btnInformazioni").click(function(){
-		testoParagrafo="Il gioco del 15 non e' sempre risolvibile, esso infatti puo' risultare impossbile da risolvere con un numero finito di mosse.Per stabilire la risolvibilita' della matrice e' necessario utilizzare la matematica.Occorre infatti calcolare per ogni numero (eccetto l'uno) da quanti numeri minori di se stesso e' seguito (scorrere la matrice da sx a dx). Dopo avere sommato tutte queste occorrenze se la somma e' pari: la matrice e' risolvibile, viceversa non lo e'. Fonti: vedere liks utili."
+		testoParagrafo="Il gioco del 15 non e' sempre risolvibile, esso infatti puo' risultare impossbile da risolvere con un numero finito di mosse.Per stabilire la risolvibilita' della matrice e' necessario utilizzare la matematica.Occorre infatti calcolare per ogni numero (eccetto l'uno) da quanti vettoreTestoCelle minori di se stesso e' seguito (scorrere la matrice da sx a dx). Dopo avere sommato tutte queste occorrenze se la somma e' pari: la matrice e' risolvibile, viceversa non lo e'. Fonti: vedere liks utili."
 		stampaParagrafo(testoParagrafo);
 	});
 });
@@ -97,7 +97,6 @@ function stampaParagrafo(testoP)
 			obiettivo=(possibiliSpostamenti[i]);
 			if ($("#mainTable").children().eq(id+obiettivo).text()=="" && $("#mainTable").children().eq(id+obiettivo).attr("id")!=undefined)
 			{
-				alert(id+obiettivo);
 				$("#mainTable").children().eq(id+obiettivo).html(testo);
 				$("#mainTable").children().eq(id).html("");	
 				spostato=true;
@@ -145,20 +144,20 @@ function controlloVincita()
 function mescolaCelle() 
 {
 		aus=0;
-		r=0;
+		nCasuale=0;
 		puliziaCelle();
 		do 
 		{
-		lunghezza=14;
-		numeri=new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
-		for (i=0;i<15;i++)
+		lunghezzaVett=14;
+		vettoreTestoCelle=new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+		for (i=0 ; i<15; i++)
 		{	
-			r=randNum(0,lunghezza);
-			$("#mainTable").children().eq(i).text(numeri[r]);
-			aus=numeri[lunghezza];
-			numeri[lunghezza]=numeri[r];
-			numeri[r]=aus;
-			lunghezza--;
+			nCasuale=randNum(0,lunghezzaVett);
+			$("#mainTable").children().eq(i).text(vettoreTestoCelle[nCasuale]);
+			aus=vettoreTestoCelle[lunghezzaVett];
+			vettoreTestoCelle[lunghezzaVett]=vettoreTestoCelle[nCasuale];
+			vettoreTestoCelle[nCasuale]=aus;
+			lunghezzaVett--;
 		}
 		controlloRisolvibilita();
 		alert("e' possibile risolvere: "+risolvibilita);
@@ -171,14 +170,15 @@ function randNum(min,max)
 {
 	var m=min;
 	var n=max;
-	var r=m+Math.round(Math.random()*n); return(r);
+	var nCasuale=m+Math.round(Math.random()*n); return(nCasuale);
 }
 
+//Funzione che ri-inizializza il testo nelle celle
 function puliziaCelle() 
 {
-	for (i=0; i<15;i++)
+	for (i=0; i<16;i++)
 	{
-		$("#mainTable").children().eq().text("");
+		$("#mainTable").children().eq(i).html("");
 	}
 } 
 
