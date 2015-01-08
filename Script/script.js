@@ -68,7 +68,7 @@ $(document).ready(function()
 		stampaParagrafo(testoParagrafo);
 	});
 	//Cambio di grafica, ottimizzare!
-	$("#btnGraficaMinimal").click(function(){
+	$("#btnGraficaBright").click(function(){
 		$("body").css({
 							"color": "black",
       				  		"background": "#e2e2e2"
@@ -83,6 +83,30 @@ $(document).ready(function()
       				  		"background": "#fcfff4",
       						"color": "black"
     					});
+	});
+	$("#btnGraficaDark").click(function(){
+		$("body").css({
+						"background": "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px,radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px",
+						"background-color":"#282828",
+						"background-size":"16px 16px"
+    					});
+    	$(".background, p").css({
+    								"background":"#474747",
+									"width":"600px",
+									"border-radius":"20px"	
+    							});
+    	$(".celleTabella").css({
+    							"background": "linear-gradient(63deg, #999 23%, transparent 23%) 7px 0, 		linear-gradient(63deg, transparent 74%, #999 78%), 		linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444",
+    						   	"background-size": "16px 48px"
+    						   });
+    	$(".topButton, .middleButton, .bottomButton").css({
+      				  									"color": "#fff",
+														"background-color": "#222"
+    													});
+    	$("#Titolo, .bottomTable").css("color","#222");
+	});
+	$("#btnGraficaVintage").click(function(){
+		alert("Work in progress!");
 	});
 });
 
@@ -228,6 +252,8 @@ function nuovaPartita()
 	switchCronometro();
 	$("#mosse").html(0);
 	mescolaCelle();
+	pausa=false;
+	newPartita=false;
 }
 
 
@@ -253,6 +279,7 @@ function switchCronometro()
             scorriTempo = false;
         	if (newPartita==true)
         	{
+        		pausa=false;
         		clearInterval(cronometro);
         		switchCronometro();
         	}
