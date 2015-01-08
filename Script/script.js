@@ -3,7 +3,7 @@
 var stringaTempo = "00:00", testoParagrafo="";
 var i,j, aus,nCasuale;
 var scorriTempo = false, pausa=false, vincita=false,newPartita=false, risolvibilita=true;
-var giocatore;
+var nomeGiocatore;
 var velocitaCronometro = 1000;
 var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec;
 //Setto impostazioni
@@ -72,18 +72,17 @@ $(document).ready(function()
 	//Cambio di grafica, ottimizzare!
 	$("#btnGraficaBright").click(function(){
 		$("body").css({
-							"color": "black",
-      				  		"background": "#e2e2e2"
-      						
+						"color": "black",
+      				  	"background": "#e2e2e2"
     					});
     	$("#Titolo, .bottomTable").css("color","black");
 		$(".background, p").css("background","lightgrey");
 		$(".celleTabella").css({
-      								"background": "#f0f9ff",
+      							"background": "#f0f9ff",
     						   });
     	$(".topButton, .middleButton, .bottomButton").css({
-      				  		"background": "#fcfff4",
-      						"color": "black"
+      				  										"background": "#fcfff4",
+      														"color": "black"
     					});
 	});
 	$("#btnGraficaDark").click(function(){
@@ -93,17 +92,17 @@ $(document).ready(function()
 						"background-size":"16px 16px"
     					});
     	$(".background, p").css({
-    								"background":"#474747",
-									"width":"600px",
-									"border-radius":"20px"	
+    							"background":"#474747",
+								"width":"600px",
+								"border-radius":"20px"	
     							});
     	$(".celleTabella").css({
     							"background": "linear-gradient(63deg, #999 23%, transparent 23%) 7px 0, 		linear-gradient(63deg, transparent 74%, #999 78%), 		linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444",
     						   	"background-size": "16px 48px"
     						   });
     	$(".topButton, .middleButton, .bottomButton").css({
-      				  									"color": "#fff",
-														"background-color": "#222"
+      				  										"color": "#fff",
+															"background-color": "#222"
     													});
     	$("#Titolo, .bottomTable").css("color","#222");
 	});
@@ -179,7 +178,7 @@ function controlloVincita()
 	if (vincita==true)
 	{
 		switchCronometro();
-		alert("Complimenti"+giocatore+"!!!\n\nTEMPO: "+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+"\nMOSSE: "+$("#mosse").text()+"");
+		alert("Complimenti"+nomeGiocatore+"!!!\n\nTEMPO: "+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+"\nMOSSE: "+$("#mosse").text()+"");
 	}
 }   
 
@@ -259,12 +258,13 @@ function nuovaPartita()
 	inputGiocatore();
 }
 
+//Funzione che gestisce il nome del nomeGiocatore
 function inputGiocatore()
 {
-	giocatore=prompt("Inserire nome giocatore", "");
-	if (giocatore=="")
-		giocatore="Player 1";
-	$("#nomeGiocatore").html(giocatore);
+	nomeGiocatore=prompt("Inserire nome giocatore", nomeGiocatore);
+	if (nomeGiocatore=="" || nomeGiocatore==null || nomeGiocatore==undefined)
+		nomeGiocatore="Player 1";
+	$("#nomeGiocatore").html(nomeGiocatore);
 }
 
 //Funzioni legate a cronometro
