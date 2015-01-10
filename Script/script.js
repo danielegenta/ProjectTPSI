@@ -189,8 +189,18 @@ function vittoria()
 	alert("Complimenti"+nomeGiocatore+"!!!\n\nTEMPO: "+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+"\nMOSSE: "+$("#mosse").text()+"");
 	var carattere="",stringaVittoria="Complimenti!!!!!";
 	var schermataVittoria=setInterval(function(){
+		
+		$("#mainTable").children().eq(i).animate({  borderSpacing: -360 }, {
+    	step: function(now,fx) {
+      	$(this).css('-webkit-transform','rotate('+now+'deg)'); 
+     	 $(this).css('-moz-transform','rotate('+now+'deg)');
+      	$(this).css('transform','rotate('+now+'deg)');
+    	},
+    	duration:'slow'
+		},'linear');
 		carattere=stringaVittoria.substring(i,i+1);
 		$("#mainTable").children().eq(i).html(carattere);
+		$("#mainTable").children().eq(i).css("color","red");
 		i++;
 		if (i==16)
 		clearInterval(schermataVittoria);
@@ -211,6 +221,7 @@ function mescolaCelle()
 		{	
 			nCasuale=randNum(0,lunghezzaVett);
 			$("#mainTable").children().eq(i).text(vettoreTestoCelle[nCasuale]);
+			$("#mainTable").children().css("color","#222");
 			aus=vettoreTestoCelle[lunghezzaVett];
 			vettoreTestoCelle[lunghezzaVett]=vettoreTestoCelle[nCasuale];
 			vettoreTestoCelle[nCasuale]=aus;
@@ -360,5 +371,3 @@ function avviaCronometro(){
     }
 }
 
-
- 
