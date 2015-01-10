@@ -12,7 +12,7 @@
 /*
 *Div rappresentati le caselle del gioco
 */
-.celleTabella 
+.celleTabella, .front, .back
 {
     cursor: pointer;
     width:70px;
