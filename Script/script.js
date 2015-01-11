@@ -1,12 +1,12 @@
-//Al caricamento del DOM inizializzo la tabella (creo sotto-div)
+//Variabili globali
 //Variabili per cronometro
 var stringaTempo = "00:00", testoParagrafo="";
 var i,j, aus,nCasuale;
 var scorriTempo = false, pausa=false, vincita=false,newPartita=false, risolvibilita=true;
 var nomeGiocatore;
 var velocitaCronometro = 1000;
-var decineMinuti,unitaMinuti,decimiSecondo,centesimiSecondo,e,f,separatoreMinSec;
-//Setto impostazioni
+var decineMinuti,unitaMinuti,decineSecondi,unitaSecondi,e,f,separatoreMinSec;
+//Al caricamento del DOM inizializzo la tabella (creo sotto-div) e setto impostazioni
 $(document).ready(function()
 {	
 	$("p").hide();
@@ -17,13 +17,9 @@ $(document).ready(function()
     	var classeDiv = "celleTabella";
         var contenutoDiv;
         if(i == 15) 
-        {
             contenutoDiv = "";
-        }
         else
-        {
         	contenutoDiv = i+1;
-        }
         var cella = $('<div />');
         cella.attr("id",i);
         cella.attr("onclick","clickCell(" +i+ ")");
@@ -56,20 +52,28 @@ $(document).ready(function()
     });
 	//Evento click su come si gioca 
 	$("#btnHowTo").click(function(){
-		testoParagrafo="L'obiettivo del gioco e' quello di formare una scala crescente, da uno a quindici, con le caselle a disposizione.Per raggiungere questo obiettivo e' necessario spostare le varie caselle sfruttando la sedicesima che e' vuota.E' possibile usufruire di una funzione pausa la quale ferma il timer e inibisce il proseguimento del gioco fintanto che rimane attivaUlteriori strumenti sono il timer anche se non ci sono limiti di tempo (se non il vostro record) e il contatore di mosse (anche qui non vi sono limiti.Il gioco e' strutturato in modo da essere sempre risolvibile con un numero finito di mosse, per ulteriori informazioni cliccare sull'apposito bottone.";
+		testoParagrafo="  L'obiettivo del gioco e' quello di formare una scala crescente, da uno a quindici, con le caselle a disposizione."+
+		"Per raggiungere questo obiettivo e' necessario spostare le varie caselle sfruttando la sedicesima che e' vuota.E' possibile usufruire "+
+		"di una funzione pausa la quale ferma il timer e inibisce il proseguimento del gioco fintanto che rimane attivaUlteriori strumenti sono "+
+		"il timer anche se non ci sono limiti di tempo (se non il vostro record) e il contatore di mosse (anche qui non vi sono limiti.Il gioco "+
+		"e' strutturato in modo da essere sempre risolvibile con un numero finito di mosse, per ulteriori informazioni cliccare sull'apposito bottone.";
 		stampaParagrafo(testoParagrafo);
 	});
 	//Evento click su informazioni
 	$("#btnCrediti").click(function(){
-		testoParagrafo="Il progetto e' stato interamente sviluppato da: Daniele Genta, Davide Massimino, Mite Nikolov e Samuele Levrone.Vedere la cartella links utili per ulteriori informazioni sugli stili."
+		testoParagrafo="  Il progetto e' stato interamente sviluppato da: Daniele Genta, Davide Massimino, Mite Nikolov e Samuele Levrone.Vedere la cartella "+
+		"links utili per ulteriori informazioni sugli stili."
 		stampaParagrafo(testoParagrafo);
 	});
 	//Evento click su crediti
 	$("#btnInformazioni").click(function(){
-		testoParagrafo="Il gioco del 15 non e' sempre risolvibile, esso infatti puo' risultare impossbile da risolvere con un numero finito di mosse.Per stabilire la risolvibilita' della matrice e' necessario utilizzare la matematica.Occorre infatti calcolare per ogni numero (eccetto l'uno) da quanti vettoreTestoCelle minori di se stesso e' seguito (scorrere la matrice da sx a dx). Dopo avere sommato tutte queste occorrenze se la somma e' pari: la matrice e' risolvibile, viceversa non lo e'. Fonti: vedere liks utili."
+		testoParagrafo="  Il gioco del 15 non e' sempre risolvibile, esso infatti puo' risultare impossbile da risolvere con un numero finito di mosse.Per stabilire "+
+		"la risolvibilita' della matrice e' necessario utilizzare la matematica.Occorre infatti calcolare per ogni numero (eccetto l'uno) da quanti numeri "+
+		"minori di se stesso e' seguito (scorrere la matrice da sx a dx). Dopo avere sommato tutte queste occorrenze se la somma e' pari: la matrice e' risolvibile, "
+		"viceversa non lo e'. Fonti: vedere liks utili."
 		stampaParagrafo(testoParagrafo);
 	});
-	//Cambio di grafica, ottimizzare!
+	//Cambio di grafica
 	$("#btnGraficaBright").click(function(){
 		$("body").css({
 						"color": "black",
@@ -77,13 +81,11 @@ $(document).ready(function()
     					});
     	$("#Titolo, .bottomTable").css("color","black");
 		$(".background, p").css("background","lightgrey");
-		$(".celleTabella").css({
-      							"background": "#f0f9ff",
-    						   });
+		$(".celleTabella").css("background","#f0f9ff");
     	$(".topButton, .middleButton, .bottomButton").css({
       				  										"background": "#fcfff4",
       														"color": "black"
-    					});
+    													 });
 	});
 	$("#btnGraficaDark").click(function(){
 		$("body").css({
@@ -112,30 +114,30 @@ $(document).ready(function()
 });
 
 //Funzione che nascone/mostra paragrafo rispetto al bottone cliccato
-function stampaParagrafo(testoP)
+function stampaParagrafo(testoParagrafo)
 {
 		$("p").hide("fast");
-		$("p").html(testoP);
+		$("p").html(testoParagrafo);
 		$("p").show("slow");
 }
 
 
 //Ottimizzare
 //Evento click su una cella della tabella
-  function clickCell(id) 
-  {
-  	if (pausa==false)
-  	{
-  	//Recupero il numero di mosse corrente
-  	var numeroMosse=parseInt($("#mosse").text())
-  	//Variabile ausiliaria utile allo scambio del testo
-	var testo=$("#mainTable").children().eq(id).text();
-	possibiliSpostamenti= new Array(-1,1,-4,4);
-	var spostato=false;
-	var obiettivo, i=0;
-	//Spostamenti sinistra, destra, giu o su
-	do
+function clickCell(id) 
+{
+	if (pausa==false)
 	{
+		//Recupero il numero di mosse corrente
+		var numeroMosse=parseInt($("#mosse").text())
+  		//Variabile ausiliaria utile allo scambio del testo
+		var testo=$("#mainTable").children().eq(id).text();
+		possibiliSpostamenti= new Array(-1,1,-4,4);
+		var spostato=false;
+		var obiettivo, i=0;
+		//Spostamenti sinistra, destra, giu o su
+		do
+		{
 			obiettivo=(possibiliSpostamenti[i]);
 			if ($("#mainTable").children().eq(id+obiettivo).text()=="" && $("#mainTable").children().eq(id+obiettivo).attr("id")!=undefined)
 			{
@@ -144,23 +146,21 @@ function stampaParagrafo(testoP)
 				spostato=true;
 			}
 			i++;		
-	}
-	while (spostato==false && i<4)
-	//Se nessuna cella è stata spostata non incremento il contatore di mosse, viceversa lo aumento di uno e controllo se ho vinto
-	if (spostato==true)
-	{		
-		numeroMosse+=1;
-		$("#mosse").html(numeroMosse);
-		controlloVincita();
-	}
-	//Ripristino lo stato della variabile ausiliatia
-	aumentaMosse=true;
+		}
+		while (spostato==false && i<4)
+		//Se nessuna cella è stata spostata non incremento il contatore di mosse, viceversa lo aumento di uno e controllo se ho vinto
+		if (spostato==true)
+		{		
+			numeroMosse+=1;
+			$("#mosse").html(numeroMosse);
+			controlloVincita();
+		}
+		//Ripristino lo stato della variabile ausiliatia
+		aumentaMosse=true;
 	}
 	else
-	{
 		alert("gioco in pausa, cliccare riavvia per continuare la partita");
-	}
-   }
+}
   
 //Controllo la vincita mediante il confronto fra il testo e gli id (che sono ordinati in modo crescente)
 function controlloVincita()
@@ -184,20 +184,19 @@ function controlloVincita()
 	}
 }   
 
+//Funzione che gestisce l'evento vittoria e la animazione
 function vittoria()
 {
 	alert("Complimenti"+nomeGiocatore+"!!!\n\nTEMPO: "+$("#s0").text()+""+$("#s1").text()+":"+$("#s3").text()+""+$("#s4").text()+"\nMOSSE: "+$("#mosse").text()+"");
 	var carattere="",stringaVittoria="Complimenti!!!!!";
+	//Animazione
 	var schermataVittoria=setInterval(function(){
-		
 		$("#mainTable").children().eq(i).animate({  borderSpacing: -360 }, {
     	step: function(now,fx) {
-      	$(this).css('-webkit-transform','rotate('+now+'deg)'); 
-     	 $(this).css('-moz-transform','rotate('+now+'deg)');
-      	$(this).css('transform','rotate('+now+'deg)');
-    	},
-    	duration:'slow'
-		},'linear');
+      		$(this).css('-webkit-transform','rotate('+now+'deg)'); 
+     		$(this).css('-moz-transform','rotate('+now+'deg)');
+      		$(this).css('transform','rotate('+now+'deg)');
+    	},duration:'slow'},'linear');
 		carattere=stringaVittoria.substring(i,i+1);
 		$("#mainTable").children().eq(i).html(carattere);
 		$("#mainTable").children().eq(i).css("color","red");
@@ -210,11 +209,11 @@ function vittoria()
 //Funzione che si occupa di mescolare le celle (il testo) appoggiandosi ad un vettore
 function mescolaCelle() 
 {
-		aus=0;
-		nCasuale=0;
-		puliziaCelle();
-		do 
-		{
+	aus=0;
+	nCasuale=0;
+	puliziaCelle();
+	do 
+	{
 		lunghezzaVett=14;
 		vettoreTestoCelle=new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
 		for (i=0 ; i<15; i++)
@@ -229,11 +228,11 @@ function mescolaCelle()
 		}
 		controlloRisolvibilita();
 		alert("e' possibile risolvere: "+risolvibilita);
-        }
-        while (risolvibilita==false)
+    }
+    while (risolvibilita==false)
 }
 
-//Funzione di generazione di un numero casuale
+//Funzione di generazione di un numero casuale (appoggio per mescolamento)
 function randNum(min,max)
 {
 	var m=min;
@@ -245,9 +244,7 @@ function randNum(min,max)
 function puliziaCelle() 
 {
 	for (i=0; i<16;i++)
-	{
 		$("#mainTable").children().eq(i).html("");
-	}
 } 
 
 //Funzione che controlla se la matrice è risolvibile (vedere documentazione per ulteriori informazioni)
@@ -294,33 +291,32 @@ function inputGiocatore()
 }
 
 //Funzioni legate a cronometro
-//tutto da rivedere ottimizzare
 //Interruttore aziona/ferma cronometro
 function switchCronometro()
 {   	
-        if(scorriTempo == false) 
-        {            
-        	if (pausa==true)
+    if(scorriTempo == false) 
+    {            
+        if (pausa==true)
         	avviaCronometro();
-        	else
-        	{
-            stringaTempo = "00:00";
-            cronometro = setInterval(function() {
+        else
+        {
+        	stringaTempo = "00:00";
+            cronometro = setInterval(function() 
+            {
                 avviaCronometro();
             },velocitaCronometro);
-            }
         }
-        else if (scorriTempo==true)
+    }
+    else if (scorriTempo==true)
+    {
+        scorriTempo = false;
+        if (newPartita==true)
         {
-            scorriTempo = false;
-        	if (newPartita==true)
-        	{
-        		pausa=false;
-        		clearInterval(cronometro);
-        		switchCronometro();
-        	}
-        }   
-        
+        	pausa=false;
+        	clearInterval(cronometro);
+        	switchCronometro();
+        }
+        }        
 }
 
 //Misura il tempo e lo stampa
@@ -331,12 +327,12 @@ function avviaCronometro(){
     decineMinuti = parseInt(stringaTempo.charAt(0));
     unitaMinuti = parseInt(stringaTempo.charAt(1));
     separatoreMinSec = ":";
-    decimiSecondo = parseInt(stringaTempo.charAt(3));
-    centesimiSecondo = parseInt(stringaTempo.charAt(4));
-                if(centesimiSecondo >= 9) {
-                    centesimiSecondo = 0;
-                    if(decimiSecondo >= 5) {
-                        decimiSecondo = 0;
+    decineSecondi = parseInt(stringaTempo.charAt(3));
+    unitaSecondi = parseInt(stringaTempo.charAt(4));
+                if(unitaSecondi >= 9) {
+                    unitaSecondi = 0;
+                    if(decineSecondi >= 5) {
+                        decineSecondi = 0;
                         if(unitaMinuti >= 9) {
                             unitaMinuti = 0;
                             if(decineMinuti >= 9)
@@ -355,19 +351,18 @@ function avviaCronometro(){
                     }
                     else
                     {
-                        decimiSecondo++;
+                        decineSecondi++;
                     }
                 }
                 else
                 {
-                    centesimiSecondo++;
+                    unitaSecondi++;
                 }
                 
         //Stampo il tempo
-        stringaTempo = String(decineMinuti) + String(unitaMinuti) + String(separatoreMinSec) + String(decimiSecondo) + String(centesimiSecondo);
+        stringaTempo = String(decineMinuti) + String(unitaMinuti) + String(separatoreMinSec) + String(decineSecondi) + String(unitaSecondi);
         for ( i = 0; i < stringaTempo.length; i++ ) {
             $("#s" + i).html(stringaTempo.charAt(i))
         }
     }
 }
-

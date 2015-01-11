@@ -1,11 +1,12 @@
 ProjectTPSI
 ===========
 
-Progetto di TPSI consistente nel creare il gioco del 15 utilizzando HTML, CSS, JS, jQuery.
+Questo è il file di documentazione.
 
 //
 
-Questo è il file di documentazione.
+Consegna:
+Progetto di TPSI consistente nel creare il gioco del 15 utilizzando HTML, CSS, JS, jQuery.
 
 //
 
@@ -19,6 +20,7 @@ Changelog-Major updates
 0.7 Inserimento di modalità shuffle (mescola); aggiunta animazioni bottoni
 0.8 Inserimento di modalità nuova partita; animazioni e paragrafi interattivi
 0.9 Pulizia e ottimizzazione generale del codice; completati paragrafi interattivi; documentation fixed.
+1.0 Pulizia, ottimizzazione codice; Fine presentazione; Aggiunta links utili; Revisione intero progetto
 
 Ogni versione contiene correzione di bug e miglioramenti generali.
 
