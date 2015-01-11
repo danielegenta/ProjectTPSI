@@ -108,9 +108,6 @@ $(document).ready(function()
     													});
     	$("#Titolo, .bottomTable").css("color","#222");
 	});
-	$("#btnGraficaVintage").click(function(){
-		alert("Work in progress!");
-	});
 });
 
 //Funzione che nascone/mostra paragrafo rispetto al bottone cliccato
@@ -336,29 +333,18 @@ function avviaCronometro(){
                         if(unitaMinuti >= 9) {
                             unitaMinuti = 0;
                             if(decineMinuti >= 9)
-                            {
                                 clearInterval(cronometro);
-                            }
                             else
-                            {
                                 decineMinuti++;
-                            }
                         }
                         else
-                        {
                             unitaMinuti++;
-                        }
                     }
                     else
-                    {
                         decineSecondi++;
-                    }
                 }
                 else
-                {
                     unitaSecondi++;
-                }
-                
         //Stampo il tempo
         stringaTempo = String(decineMinuti) + String(unitaMinuti) + String(separatoreMinSec) + String(decineSecondi) + String(unitaSecondi);
         for ( i = 0; i < stringaTempo.length; i++ ) {
