@@ -2,7 +2,7 @@
 //Variabili per cronometro
 var stringaTempo = "00:00", testoParagrafo="";
 var i,j, aus,nCasuale;
-var scorriTempo = false, pausa=false, vincita=false,newPartita=false, risolvibilita=true;
+var scorriTempo = false, pausa=false, vincita=false,newPartita=false, risolvibilita=true, graficaDark=true;
 var nomeGiocatore;
 var velocitaCronometro = 1000;
 var decineMinuti,unitaMinuti,decineSecondi,unitaSecondi,e,f,separatoreMinSec;
@@ -32,6 +32,10 @@ $(document).ready(function()
     mescolaCelle();
     //Avvio cronometro
     switchCronometro();
+    //Controllo se le celle son state mescolate in modo ordinato
+    controlloVincita();
+    //Se una cella è al posto giusto viene colorata
+    coloraCelle();
     //Evento click su mescola celle
     $("#btnMescola").click(function(){
     	mescolaCelle();
@@ -75,6 +79,7 @@ $(document).ready(function()
 	});
 	//Cambio di grafica
 	$("#btnGraficaBright").click(function(){
+		graficaDark=false;
 		$("body").css({
 						"color": "black",
       				  	"background": "#e2e2e2"
@@ -86,8 +91,10 @@ $(document).ready(function()
       				  										"background": "#fcfff4",
       														"color": "black"
     													 });
+    	coloraCelle();
 	});
 	$("#btnGraficaDark").click(function(){
+		graficaDark=true;
 		$("body").css({
 						"background": "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px,radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px",
 						"background-color":"#282828",
@@ -107,6 +114,7 @@ $(document).ready(function()
 															"background-color": "#222"
     													});
     	$("#Titolo, .bottomTable").css("color","#222");
+    	coloraCelle();
 	});
 });
 
@@ -154,6 +162,7 @@ function clickCell(id)
 		}
 		//Ripristino lo stato della variabile ausiliatia
 		aumentaMosse=true;
+		coloraCelle();
 	}
 	else
 		alert("gioco in pausa, cliccare riavvia per continuare la partita");
@@ -176,8 +185,8 @@ function controlloVincita()
 	//Se ho vinto fermo il cronometro e mostro i dettagli della partita
 	if (vincita==true)
 	{
-		switchCronometro();
 		vittoria();
+		switchCronometro();
 	}
 }   
 
@@ -240,8 +249,20 @@ function randNum(min,max)
 //Funzione che ri-inizializza il testo nelle celle
 function puliziaCelle() 
 {
-	for (i=0; i<16;i++)
-		$("#mainTable").children().eq(i).html("");
+	for (i=0; i<16; i++)
+	{
+		 if (graficaDark==true)
+		{
+			$("#mainTable").children().eq(i).css({
+    							"background": "linear-gradient(63deg, #999 23%, transparent 23%) 7px 0, 		linear-gradient(63deg, transparent 74%, #999 78%), 		linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444",
+    						   	"background-size": "16px 48px"
+    						   });
+		}
+		else
+		{
+			$("#mainTable").children().eq(i).css("background","#f0f9ff");
+		}
+	}
 } 
 
 //Funzione che controlla se la matrice è risolvibile (vedere documentazione per ulteriori informazioni)
@@ -351,4 +372,27 @@ function avviaCronometro(){
             $("#s" + i).html(stringaTempo.charAt(i))
         }
     }
+}
+
+
+function coloraCelle()
+{
+/*
+	for (i=0; i<16; i++)
+	{
+		if($("#mainTable").children().eq(i).text()==(parseInt($("#mainTable").children().eq(i).attr("id"))+1))
+			$("#mainTable").children().eq(i).css("background","lightgreen")
+		else if (graficaDark==true)
+		{
+			$("#mainTable").children().eq(i).css({
+    							"background": "linear-gradient(63deg, #999 23%, transparent 23%) 7px 0, 		linear-gradient(63deg, transparent 74%, #999 78%), 		linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), #444",
+    						   	"background-size": "16px 48px"
+    						   });
+		}
+		else
+		{
+			$("#mainTable").children().eq(i).css("background","#f0f9ff");
+		}
+	}
+*/
 }
