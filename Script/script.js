@@ -309,7 +309,6 @@ function inputGiocatore()
 }
 
 //Funzioni legate a cronometro
-//Interruttore aziona/ferma cronometro
 function switchCronometro()
 {   	
     if(scorriTempo == false) 
